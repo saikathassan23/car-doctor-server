@@ -8,12 +8,15 @@ const cookieParser = require('cookie-parser');
 const chalk = require('chalk');
 const app = express();
 
-// the greate morgan
+// the great morgan
 // app.use(morgan(':method :url'));
 morgan.token('colorized', (req, res) => {
-  return chalk.red(req.method) + ' ' + chalk.blue(req.url);
+  return (
+    chalk.red(req.method) +
+    ' ' +
+    chalk.blue(`http://localhost:${process.env.PORT}` + req.url)
+  );
 });
-
 app.use(morgan(':colorized'));
 
 // middleware
